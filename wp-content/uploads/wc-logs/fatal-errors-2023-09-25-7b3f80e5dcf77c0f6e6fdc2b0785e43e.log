@@ -1,0 +1,11 @@
+2023-09-25T07:44:30+00:00 CRITICAL Uncaught Error: Class 'WP_Site_Health' not found in C:\xampp\htdocs\cabinetmaster.com.vn\wp-settings.php:620
+Stack trace:
+#0 C:\xampp\htdocs\cabinetmaster.com.vn\wp-config.php(100): require_once()
+#1 C:\xampp\htdocs\cabinetmaster.com.vn\wp-load.php(50): require_once('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\cabinetmaster.com.vn\wp-blog-header.php(13): require_once('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\cabinetmaster.com.vn\index.php(17): require('C:\\xampp\\htdocs...')
+#4 {main}
+  thrown in C:\xampp\htdocs\cabinetmaster.com.vn\wp-settings.php on line 620
+
+2023-09-25T08:55:29+00:00 CRITICAL syntax error, unexpected '}', expecting end of file in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\template-parts\header\partials\element-cart.php on line 89
+
