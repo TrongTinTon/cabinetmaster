@@ -26,13 +26,13 @@ function flatsome_blog_article_classes() {
 	if ( ! empty( $classes ) ) echo implode( ' ', $classes );
 }
 
-// Add Custom Blog Header
-function flatsome_custom_blog_header() {
-	if ( get_theme_mod( 'blog_header' ) && is_home() ) {
-		echo '<div class="blog-header-wrapper">' . do_shortcode( get_theme_mod( 'blog_header' ) ) . '</div>';
-	}
-}
-add_action( 'flatsome_after_header', 'flatsome_custom_blog_header', 10 );
+// // Add Custom Blog Header
+// function flatsome_custom_blog_header() {
+// 	if ( get_theme_mod( 'blog_header' ) && is_home() ) {
+// 		echo '<div class="blog-header-wrapper">' . do_shortcode( get_theme_mod( 'blog_header' ) ) . '</div>';
+// 	}
+// }
+// add_action( 'flatsome_after_header', 'flatsome_custom_blog_header', 10 );
 
 // Add transparent headers
 function flatsome_blog_header_classes( $classes ) {

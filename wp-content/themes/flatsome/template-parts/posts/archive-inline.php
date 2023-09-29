@@ -2,16 +2,13 @@
 <div id="post-list">
 
 <?php /* Start the Loop */ ?>
-<?php while ( have_posts() ) : the_post(); ?>
+<?php 
+echo '<h1 class="blog-header-wrapper"><span>' . get_theme_mod( 'blog_header' ) . '</span></h1>';
+while ( have_posts() ) : the_post(); ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<div class="article-inner <?php flatsome_blog_article_classes(); ?>">
 
-		<header class="entry-header">
-	  	<div class="entry-header-text text-<?php echo get_theme_mod( 'blog_posts_title_align', 'center' );?>">
-			   	<?php get_template_part( 'template-parts/posts/partials/entry', 'title');  ?>
-			</div>
-		</header>
 		<?php if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it. ?>
 		<div class="entry-image-float">
 	 		<?php get_template_part( 'template-parts/posts/partials/entry-image', 'default'); ?>

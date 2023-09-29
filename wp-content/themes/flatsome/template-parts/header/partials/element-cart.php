@@ -20,7 +20,7 @@
 <a rel="nofollow" href="<?php echo esc_url( wc_get_cart_url() ); ?>" title="<?php _e('Cart', 'woocommerce'); ?>" class="header-cart-link <?php echo get_flatsome_icon_class($icon_style, 'small'); ?>">
 
 <?php } else if($cart_style == 'off-canvas') { ?>
-	<a> href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="header-cart-link off-canvas-toggle nav-top-link <?php echo get_flatsome_icon_class($icon_style, 'small'); ?>" data-open="#cart-popup" data-class="off-canvas-cart" title="<?php _e('Cart', 'woocommerce'); ?>" data-pos="right">
+	<a rel="nofollow"> href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="header-cart-link off-canvas-toggle nav-top-link <?php echo get_flatsome_icon_class($icon_style, 'small'); ?>" data-open="#cart-popup" data-class="off-canvas-cart" title="<?php _e('Cart', 'woocommerce'); ?>" data-pos="right">
 <?php } ?>
 
 <?php  if($cart_total || $cart_title) { ?>

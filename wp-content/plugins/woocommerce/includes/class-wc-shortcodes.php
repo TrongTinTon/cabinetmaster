@@ -315,6 +315,10 @@ class WC_Shortcodes {
 			return '';
 		}
 
+		if (empty($atts['id']) && is_product()) {
+			$atts['id'] = $post->ID;
+		}
+
 		$atts = shortcode_atts(
 			array(
 				'id'         => '',
@@ -394,6 +398,7 @@ class WC_Shortcodes {
 		}
 
 		$_product = wc_get_product( $product_data );
+
 
 		return esc_url( $_product->add_to_cart_url() );
 	}
@@ -612,7 +617,7 @@ class WC_Shortcodes {
 		}
 
 		remove_filter( 'woocommerce_add_to_cart_form_action', '__return_empty_string' );
-
+	
 		return '<div class="woocommerce">' . ob_get_clean() . '</div>';
 	}
 

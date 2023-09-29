@@ -1,8 +1,8 @@
 <?php
 /**
- * Loop Add to Cart
+ * Simple product add to cart
  *
- * This template can be overridden by copying it to yourtheme/woocommerce/loop/add-to-cart.php.
+ * This template can be overridden by copying it to yourtheme/woocommerce/single-product/add-to-cart/simple.php.
  *
  * HOWEVER, on occasion WooCommerce will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
@@ -10,27 +10,48 @@
  * happen. When this occurs the version of the template file will be bumped and
  * the readme will list any important changes.
  *
- * @see         https://docs.woocommerce.com/document/template-structure/
- * @package     WooCommerce\Templates
- * @version     3.3.0
+ * @see https://docs.woocommerce.com/document/template-structure/
+ * @package WooCommerce\Templates
+ * @version 7.0.1
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 global $product;
 
-echo apply_filters(
-	'woocommerce_loop_add_to_cart_link', // WPCS: XSS ok.
-	sprintf(
-		'<a href="%s" data-quantity="%s" class="%s" %s>%s</a>',
-		esc_url( $product->add_to_cart_url() ),
-		esc_attr( isset( $args['quantity'] ) ? $args['quantity'] : 1 ),
-		esc_attr( isset( $args['class'] ) ? $args['class'] : 'button' ),
-		isset( $args['attributes'] ) ? wc_implode_html_attributes( $args['attributes'] ) : '',
-		esc_html( $product->add_to_cart_text() )
-	),
-	$product,
-	$args
-);
+if ( ! $product->is_purchasable() ) {
+	return;
+}
+
+echo wc_get_stock_html( $product ); // WPCS: XSS ok.
+
+?>
+
+	<?php do_action( 'woocommerce_before_add_to_cart_form' ); ?>
+
+	<form class="cart" action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data'>
+		<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
+
+		<?php
+		do_action( 'woocommerce_before_add_to_cart_quantity' );
+
+		woocommerce_quantity_input(
+			array(
+				'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),
+				'max_value'   => "0",
+				'input_value' => isset( $args['quantity'] ) ? wc_stock_amount( wp_unslash( $args['quantity'] ) ) : $product->get_min_purchase_quantity(), // WPCS: CSRF ok, input var ok.
+			)
+		);
+
+		do_action( 'woocommerce_after_add_to_cart_quantity' );
+		?>
+
+		<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="single_add_to_cart_button button alt<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
+
+		<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
+	</form>
+
+	<?php do_action( 'woocommerce_after_add_to_cart_form' ); ?>
+
+
+

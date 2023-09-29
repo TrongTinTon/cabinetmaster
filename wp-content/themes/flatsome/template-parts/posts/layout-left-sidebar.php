@@ -15,6 +15,7 @@
 	<?php if(!is_single() && get_theme_mod('blog_featured', '') == 'content'){ get_template_part('template-parts/posts/featured-posts'); } ?>
 	<?php
 		if(is_single()){
+			echo '<h1 class="blog-header-wrapper"><span>' . get_theme_mod( 'blog_header' ) . '</span></h1>';
 			get_template_part( 'template-parts/posts/single');
 			comments_template();
 		} elseif(get_theme_mod('blog_style_archive', '') && (is_archive() || is_search())){
