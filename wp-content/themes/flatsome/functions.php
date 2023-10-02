@@ -106,4 +106,42 @@ remove_action( 'wp_footer', array( WC()->structured_data, 'output_structured_dat
 remove_action( 'woocommerce_email_order_details', array( WC()->structured_data, 'output_email_structured_data' ), 30 ); // Emails
 }
 add_action( 'init', 'remove_output_structured_data' );
+
+add_filter('woocommerce_is_purchasable', '__return_TRUE'); 
+add_filter('woocommerce_is_in_stock', '__return_TRUE'); 
+add_filter('woocommerce_product_backorders_allowed', '__return_TRUE'); 
+
+function custom_add_to_cart_button() {
+    global $product;
+    if (is_product()) {
+        // wc_get_stock_html( $product ); // WPCS: XSS ok.
+        $action =  "".esc_url(apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink()));
+        do_action( 'woocommerce_before_add_to_cart_form' );
+        $html = "<form class='cart' action='{$action}' method='post' enctype='multipart/form-data'>";
+        do_action( 'woocommerce_before_add_to_cart_button' );
+        do_action( 'woocommerce_before_add_to_cart_quantity' );
+        $inputQty =  woocommerce_quantity_input(
+            array(
+                'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),
+                'max_value'   => 0,
+                'input_value' => isset( $_POST['quantity']) ? wc_stock_amount( wp_unslash( $_POST['quantity'] ) ) : $product->get_min_purchase_quantity(), 
+            ), 
+            $product,
+            false
+        );
+        $html .= $inputQty;
+        do_action( 'woocommerce_after_add_to_cart_quantity' );
+        $escAttrId = esc_attr( $product->get_id());
+        $escAttrClass = ( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' );
+        $escBtnText =  esc_html( $product->single_add_to_cart_text() );
+        $html .= "<button type='submit' name='add-to-cart' value='$escAttrId' class='single_add_to_cart_button button alt$escAttrClass'>$escBtnText</button>";
+        do_action( 'woocommerce_after_add_to_cart_button' );
+        $html .= "</form>";
+        return $html;
+    } else {
+        return "Shortcode only use Product page";
+    }
+}
+
+add_shortcode('custom_add_to_cart_button', 'custom_add_to_cart_button');
  
