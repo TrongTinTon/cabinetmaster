@@ -144,4 +144,22 @@ function custom_add_to_cart_button() {
 }
 
 add_shortcode('custom_add_to_cart_button', 'custom_add_to_cart_button');
+
+
+function custom_scroll_product_page() {
+    ?>
+        <script type='text/javascript'>
+            window.addEventListener('scroll', function() {
+                var headerWrapper = document.querySelector('.header-wrapper');
+                var tabChucnang = document.querySelector('.tab-chucnang');
+                
+                if (headerWrapper.classList.contains('stuck') && tabChucnang) {
+                    tabChucnang.style.top = '120px';
+                }
+            });
+        </script>;
+    <?php
+}
+add_action('wp_footer', 'custom_scroll_product_page');
+
  

@@ -6,7 +6,6 @@
  */
 
 if ( ! isset( $wp_did_header ) ) {
-	var_dump($wp_did_header);
 	$wp_did_header = true;
 
 	// Load the WordPress library.

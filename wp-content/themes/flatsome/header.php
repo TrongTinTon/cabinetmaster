@@ -33,8 +33,8 @@
             border-radius: 5px;
         }
 	    
-	   .header-wrapper.stuck {
-	        display: none;
+	    .header-wrapper.stuck {
+	        display: block;
         }
         .product-small.box {
             height: 325px;
