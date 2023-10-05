@@ -74,7 +74,7 @@ $review_ratings_enabled = wc_review_ratings_enabled();
 	<?php if ( get_option( 'woocommerce_review_rating_verification_required' ) === 'no' || wc_customer_bought_product( '', get_current_user_id(), $product->get_id() ) ) : ?>
 		<div id="review_form_wrapper" class="large-<?php if ( get_comment_pages_count() == 0 || $tab_style == 'sections' || $tab_style == 'tabs_vertical' ) { echo '12'; } else { echo '5'; } ?> col">
 			<div id="review_form" class="col-inner">
-				<div class="review-form-inner has-border">
+				<div class="review-form-inner">
 				<?php
 				$commenter    = wp_get_current_commenter();
 				$comment_form = array(
@@ -109,6 +109,7 @@ $review_ratings_enabled = wc_review_ratings_enabled();
 
 				$comment_form['fields'] = array();
 
+
 				foreach ( $fields as $key => $field ) {
 					$field_html  = '<p class="comment-form-' . esc_attr( $key ) . '">';
 					$field_html .= '<label for="' . esc_attr( $key ) . '">' . esc_html( $field['label'] );
@@ -140,7 +141,7 @@ $review_ratings_enabled = wc_review_ratings_enabled();
 				}
 
 				$comment_form['comment_field'] .= '<p class="comment-form-comment"><label for="comment">' . esc_html__( 'Your review', 'woocommerce' ) . '&nbsp;<span class="required">*</span></label><textarea id="comment" name="comment" cols="45" rows="8" required></textarea></p>';
-
+				
 				comment_form( apply_filters( 'woocommerce_product_review_comment_form_args', $comment_form ) );
 				?>
 				</div>

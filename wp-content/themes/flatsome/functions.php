@@ -149,13 +149,64 @@ add_shortcode('custom_add_to_cart_button', 'custom_add_to_cart_button');
 function custom_scroll_product_page() {
     ?>
         <script type='text/javascript'>
+            function clickNavScroll(targets, id, parentId) {
+                var targetElements = document.querySelectorAll(`#${id}`);
+                var parentLinks = document.querySelectorAll(`#${parentId} a`);
+                targetElements.forEach(function (element) {
+                    element.classList.remove('active');
+                });
+
+                parentLinks.forEach(function (link) {
+                    link.classList.remove('active');
+                });
+
+                targetElements.forEach(function (element) {
+                    element.classList.add('active');
+                });
+            }
+
             window.addEventListener('scroll', function() {
                 var headerWrapper = document.querySelector('.header-wrapper');
-                var tabChucnang = document.querySelector('.tab-chucnang');
-                
+                var stickyTab = document.getElementById("sticky-tab-chucnang-container");
+                const scrollPosition = window.scrollY;
+                var tabChucnang = document.getElementById('sticky-tab-chucnang')
+                var rect = stickyTab.getBoundingClientRect();
+                var rectItemTab = tabChucnang.getBoundingClientRect();
+                if (rect.top <= 0 && rect.bottom >= 0 && rect.bottom  > (rectItemTab.height + 120)) {
+                    tabChucnang.classList.add('sticky-tab-fixed')
+                }  else {
+                    tabChucnang.classList.remove('sticky-tab-fixed')
+                }
+
                 if (headerWrapper.classList.contains('stuck') && tabChucnang) {
                     tabChucnang.style.top = '120px';
+                } else if (tabChucnang) {
+                    tabChucnang.style.top = '0';
                 }
+
+                var tabDescriptions = document.querySelectorAll('#tab-description h3 span');
+                tabDescriptions.forEach(function(span) {
+                    var position = span.getBoundingClientRect();
+                    const windowHeight = window.innerHeight;
+                    const tabTop = position.top + scrollPosition;
+                    var id = span.getAttribute('id');
+                    if (id && tabTop <= scrollPosition + (windowHeight / 2)) {
+                        
+                        var stickyTabLinks = document.querySelectorAll('#sticky-tab .tab-chucnang a');
+
+                        stickyTabLinks.forEach(function(link) {
+                            link.classList.remove('active');
+                        });
+
+                        var activeLink = document.querySelector('#sticky-tab .tab-chucnang a[id="head-' + id + '"]');
+
+                        if (activeLink) {
+
+                            activeLink.classList.add('active');
+                        }
+                    }
+                   
+                });
             });
         </script>;
     <?php
