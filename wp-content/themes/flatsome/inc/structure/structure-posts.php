@@ -181,7 +181,7 @@ function flatsome_comment( $comment, $args, $depth ) {
                 </div>
 
                 <div class="flex-col flex-grow">
-                    <?php printf( __( '%s <span class="says">says:</span>', 'flatsome' ), sprintf( '<cite class="strong fn">%s</cite>', get_comment_author_link() ) ); ?>
+                    <?php printf( __( '%s', 'flatsome' ), sprintf( '<cite class="strong fn">%s</cite>', get_comment_author_link() ) ); ?>
                     <?php if ( $comment->comment_approved == '0' ) : ?>
                     <em><?php _e( 'Your comment is awaiting moderation.', 'flatsome' ); ?></em>
                      <br />
@@ -192,9 +192,9 @@ function flatsome_comment( $comment, $args, $depth ) {
 
                  <div class="comment-meta commentmetadata uppercase is-xsmall clear">
                     <a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><time datetime="<?php comment_time( 'c' ); ?>" class="pull-left">
-                    <?php printf( _x( '%1$s at %2$s', '1: date, 2: time', 'flatsome' ), get_comment_date(), get_comment_time() ); ?>
+                    <?php printf( _x( '%1$s vào lúc %2$s', '1: date, 2: time', 'flatsome' ), get_comment_date(), get_comment_time() ); ?>
                     </time></a>
-                    <?php edit_comment_link( __( 'Edit', 'flatsome' ), '<span class="edit-link ml-half strong">', '<span>' ); ?>
+                    <?php edit_comment_link( __( 'Chỉnh sửa', 'flatsome' ), '<span class="edit-link ml-half strong">', '<span>' ); ?>
 
                         <div class="reply pull-right">
                             <?php
@@ -241,7 +241,7 @@ function flatsome_posted_on() {
         '<span class="meta-author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
     );
 
-    echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>';
+//     echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>';
 
 }
 endif;

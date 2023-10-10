@@ -20,7 +20,7 @@ if ( $the_query->have_posts() ) : ?>
 	// Set ids
 	$ids = implode(',', $ids);
 
-	$readmore = __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'flatsome' );
+	$readmore = __( 'Đọc tiếp <span class="meta-nav">&rarr;</span>', 'flatsome' );
 ?>
 	<?php
 	echo flatsome_apply_shortcode( 'blog_posts', array(

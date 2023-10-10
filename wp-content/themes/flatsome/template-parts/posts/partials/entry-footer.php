@@ -1,4 +1,4 @@
-<footer class="entry-meta clearfix">
+<footer class="entry-meta clearfix hide">
 	<?php if ( 'post' == get_post_type() ) : // Hide category and tag text for pages on Search ?>
 		<?php
 			/* translators: used between list items, there is a space after the comma */
