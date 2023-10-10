@@ -168,49 +168,80 @@ function custom_scroll_product_page() {
             window.addEventListener('scroll', function() {
                 var headerWrapper = document.querySelector('.header-wrapper');
                 var stickyTab = document.getElementById("sticky-tab-chucnang-container");
-                const scrollPosition = window.scrollY;
-                var tabChucnang = document.getElementById('sticky-tab-chucnang')
-                var rect = stickyTab.getBoundingClientRect();
-                var rectItemTab = tabChucnang.getBoundingClientRect();
-                if (rect.top <= 0 && rect.bottom >= 0 && rect.bottom  > (rectItemTab.height + 120)) {
-                    tabChucnang.classList.add('sticky-tab-fixed')
-                }  else {
-                    tabChucnang.classList.remove('sticky-tab-fixed')
-                }
-
-                if (headerWrapper.classList.contains('stuck') && tabChucnang) {
-                    tabChucnang.style.top = '120px';
-                } else if (tabChucnang) {
-                    tabChucnang.style.top = '0';
-                }
-
-                var tabDescriptions = document.querySelectorAll('#tab-description h3 span');
-                tabDescriptions.forEach(function(span) {
-                    var position = span.getBoundingClientRect();
-                    const windowHeight = window.innerHeight;
-                    const tabTop = position.top + scrollPosition;
-                    var id = span.getAttribute('id');
-                    if (id && tabTop <= scrollPosition + (windowHeight / 2)) {
-                        
-                        var stickyTabLinks = document.querySelectorAll('#sticky-tab .tab-chucnang a');
-
-                        stickyTabLinks.forEach(function(link) {
-                            link.classList.remove('active');
-                        });
-
-                        var activeLink = document.querySelector('#sticky-tab .tab-chucnang a[id="head-' + id + '"]');
-
-                        if (activeLink) {
-
-                            activeLink.classList.add('active');
-                        }
+                if (stickyTab) {
+                    const scrollPosition = window.scrollY;
+                    var tabChucnang = document.getElementById('sticky-tab-chucnang')
+                    var rect = stickyTab.getBoundingClientRect();
+                    var rectItemTab = tabChucnang.getBoundingClientRect();
+                    if (rect.top <= 0 && rect.bottom >= 0 && rect.bottom  > (rectItemTab.height + 120)) {
+                        tabChucnang.classList.add('sticky-tab-fixed')
+                    }  else {
+                        tabChucnang.classList.remove('sticky-tab-fixed')
                     }
-                   
-                });
+
+                    if (headerWrapper.classList.contains('stuck') && tabChucnang) {
+                        tabChucnang.style.top = '120px';
+                    } else if (tabChucnang) {
+                        tabChucnang.style.top = '0';
+                    }
+
+                    var tabDescriptions = document.querySelectorAll('#tab-description h3 span');
+                    tabDescriptions.forEach(function(span) {
+                        var position = span.getBoundingClientRect();
+                        const windowHeight = window.innerHeight;
+                        const tabTop = position.top + scrollPosition;
+                        var id = span.getAttribute('id');
+                        if (id && tabTop <= scrollPosition + (windowHeight / 2)) {
+                            
+                            var stickyTabLinks = document.querySelectorAll('#sticky-tab .tab-chucnang a');
+
+                            stickyTabLinks.forEach(function(link) {
+                                link.classList.remove('active');
+                            });
+
+                            var activeLink = document.querySelector('#sticky-tab .tab-chucnang a[id="head-' + id + '"]');
+
+                            if (activeLink) {
+
+                                activeLink.classList.add('active');
+                            }
+                        }
+                       
+                    });
+                }
             });
         </script>;
     <?php
 }
 add_action('wp_footer', 'custom_scroll_product_page');
 
- 
+/**
+ * Convert Rank Math FAQ Block Into Accordion
+ */
+function turn_rm_toc_collapsable() {
+    ?>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var tocItems = document.querySelectorAll("div.wp-block-rank-math-toc-block");
+            tocItems && tocItems.forEach(function(tocItem) {
+                    tocItem.addEventListener("click", function(event) {
+                        if (event.target.tagName.toLowerCase() === "a") {
+                            return; // Khi click vào "a", không thực hiện thay đổi
+                        }
+                        var nav = this.querySelector("nav");
+                        if (getComputedStyle(nav).getPropertyValue("display") === "none") {
+                            nav.style.display = "block";
+                        } else {
+                            nav.style.display = "none";
+                        }
+                    });
+                });
+            
+        });
+    </script>
+    <?php
+}
+add_action( 'wp_footer', 'turn_rm_toc_collapsable' );
+
+
+ add_filter('use_block_editor_for_post', '__return_TRUE');

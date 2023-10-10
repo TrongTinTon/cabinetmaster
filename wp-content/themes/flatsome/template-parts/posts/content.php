@@ -8,11 +8,11 @@
 		</header>
 		<?php the_excerpt(); ?>
 		<div class="text-<?php echo get_theme_mod( 'blog_posts_title_align', 'center' );?>">
-			<a class="more-link button primary is-outline is-smaller" href="<?php echo get_the_permalink(); ?>"><?php _e('Continue reading <span class="meta-nav">&rarr;</span>', 'flatsome'); ?></a>
+			<a class="more-link button primary is-outline is-smaller" href="<?php echo get_the_permalink(); ?>"><?php _e('Đọc tiếp <span class="meta-nav">&rarr;</span>', 'flatsome'); ?></a>
 		</div>
 	</div>
 	<?php } else { ?>
-	<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'flatsome' ) ); ?>
+	<?php the_content( __( 'Đọc tiếp <span class="meta-nav">&rarr;</span>', 'flatsome' ) ); ?>
 	<?php
 		wp_link_pages();
 	?>

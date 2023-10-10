@@ -46,9 +46,9 @@
 				</div>
 			</div>
 			<div class="flex-col flex-grow">
-				<h5 class="author-name uppercase pt-half">
+				<p class="author-name uppercase pt-half">
 					<?php the_author_meta( 'display_name' ); ?>
-				</h5>
+				</p>
 				<p class="author-desc small"><?php the_author_meta( 'description' ); ?></p>
 			</div>
 		</div>
