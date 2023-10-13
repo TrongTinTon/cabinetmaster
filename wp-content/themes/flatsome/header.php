@@ -9,6 +9,53 @@
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 	<style>
+        .loading-cat {
+            opacity: 0.5;
+        }
+        #category-tab-container {
+            background-image: linear-gradient(180deg, #6c6a6a, #3c3c3c);
+            padding: 2em;
+            margin-bottom: 3.5em;
+        }
+
+        #category-tab-container .filter-wrap {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        #category-tab-container .filter-wrap h4 {
+            width: 8%;
+            text-align: center;
+        }
+        #category-tab-container .list-filter {
+            flex: 1;
+            padding: 0 40px 0 15px;
+            box-sizing: border-box;
+            display: grid;
+            grid-template-columns: repeat(5,1fr);
+            row-gap: 15px;
+            -moz-column-gap: 10px;
+            column-gap: 10px;
+        }
+        #category-tab-container .list-filter .subcategory-item {
+            box-sizing: border-box;
+            background: #363636;
+            color: #fff;
+            cursor: pointer;
+            user-select: none;
+            padding: 0.5em;
+            display: flex;
+            border-radius: 6px;
+        }
+        #category-tab-container .list-filter .subcategory-item span {
+            margin: auto;
+            text-align: center;
+        }
+        #category-tabs .active {
+            font-weight: 600;
+            box-shadow: 2px -1px;
+            background-image: linear-gradient(327deg, #ff7700, #fa9419) !important;
+        }
 	    .tab-chucnang {
             position: sticky;
             width: 100%;
@@ -84,10 +131,17 @@
         
         /*mobie*/
         @media(max-width: 740px){
+            #category-tab-container .list-filter{
+                 grid-template-columns: repeat(2,1fr);
+            }
+
             .tab-panels .tab-container {
                 padding: 0;
             }
-
+            #category-tab-container .filter-wrap h4 {
+                width: auto;
+                text-align: left;
+            }
             .tab-chucnang .list-chucnang {
                 height: 45px;
                 width: 60px;
@@ -145,5 +199,5 @@
 	</header>
 
 	<?php do_action( 'flatsome_after_header' ); ?>
-
+    
 	<main id="main" class="<?php flatsome_main_classes(); ?>">

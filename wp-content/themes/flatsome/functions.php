@@ -145,10 +145,48 @@ function custom_add_to_cart_button() {
 
 add_shortcode('custom_add_to_cart_button', 'custom_add_to_cart_button');
 
+add_action( 'wp_ajax_nopriv_get_category_json', 'get_category_json' );
+
+function get_category_json() {
+    get_product_subcategory($_POST['term_id']);
+    wp_die();
+}
 
 function custom_scroll_product_page() {
-    ?>
+    ?>  
         <script type='text/javascript'>
+            function onClickSubCategory(targets, id, parentId) {
+                var targetElements = document.querySelectorAll(`#${id}`);
+                var parentLinks = document.querySelectorAll(`#${parentId} .subcategory-item`);
+                targetElements.forEach(function (element) {
+                    element.classList.remove('active');
+                });
+
+                parentLinks.forEach(function (link) {
+                    link.classList.remove('active');
+                });
+                var term_id =  jQuery(targets).data('term');
+                var parent  =  jQuery(targets).data('parent');
+
+                var data = {
+                    'action': 'get_category_json',
+                    'term_id': term_id
+                };
+                var ajaxurl =  "<?php echo admin_url('admin-ajax.php'); ?>";
+                jQuery('#load-ajax-products').addClass('loading-cat');
+                jQuery.post(ajaxurl, data, function(response) {
+                    console.log(jQuery('.products'));
+                    jQuery('#load-ajax-products').empty();
+                    jQuery('#load-ajax-products').html(response);
+                    jQuery('.woocommerce-pagination').empty();
+                    jQuery('#load-ajax-products').removeClass('loading-cat');
+                });
+               
+                targetElements.forEach(function (element) {
+                    element.classList.add('active');
+                });
+            }
+
             function clickNavScroll(targets, id, parentId) {
                 var targetElements = document.querySelectorAll(`#${id}`);
                 var parentLinks = document.querySelectorAll(`#${parentId} a`);
@@ -159,7 +197,6 @@ function custom_scroll_product_page() {
                 parentLinks.forEach(function (link) {
                     link.classList.remove('active');
                 });
-
                 targetElements.forEach(function (element) {
                     element.classList.add('active');
                 });
@@ -213,6 +250,7 @@ function custom_scroll_product_page() {
         </script>;
     <?php
 }
+
 add_action('wp_footer', 'custom_scroll_product_page');
 
 /**
@@ -242,6 +280,99 @@ function turn_rm_toc_collapsable() {
     <?php
 }
 add_action( 'wp_footer', 'turn_rm_toc_collapsable' );
+add_filter('use_block_editor_for_post', '__return_TRUE');
+
+function tab_catgoreis($categories = array()) {
+    if (empty($categories)) {
+        $queried_object = get_queried_object();
+        $catId = $queried_object->parent > 0 ? $queried_object->parent : $queried_object->term_id;
+        $args = ['parent' => $catId];
+        get_terms( 'product_cat', $args );
+        $categories = get_terms( 'product_cat', $args );
+    }
+    $html = '<div id="category-tab-container">';
+    $html.= '<div class="filter-wrap">';
+    $html.="<h4>Lọc theo:</h4>";
+    $html .= '<div id="category-tabs" class="list-filter">';
+
+    foreach ( $categories as $category ) {
+        $id = "head-$category->term_id";
+        $term_id = $category->term_id;
+        $parent = $category->parent;
+        $stickyContainer = 'category-tabs';
+        $urlTabIndex = "#$category->id";
+        $active_class = $term_id == $queried_object->term_id ? "active" : "";
+        $html .= "<div id='$id' data-term='$term_id' data-parent='$parent'  onclick='onClickSubCategory(this, `$id`, `$stickyContainer`)' class='subcategory-item $active_class'><span>$category->name</span></div>";
+    }
+    $html.="</div>";
+    $html.="</div>";
+    $html .= "</div>";
+    return $html;
+}
+
+function get_product_subcategory($termId) {
+    $terms =  get_term($termId);
+
+    if ( $terms ) {
+        $args = array(
+          'post_type' => 'product',
+          'product_cat' => $terms->slug, 
+          'nopaging' => true,
+        );
+        $loop = new WP_Query( $args );  
+        if ( $loop->have_posts() ) {
+            woocommerce_product_loop_start();
+            while ( $loop->have_posts() ) : $loop->the_post();
+                wc_get_template_part( 'content', 'product' );
+            endwhile;
+            woocommerce_product_loop_end();
+        }  
+    }
+}
+
+function woocommerce_product_subcategory( $args = array() ) {
+    echo tab_catgoreis();
+    $queried_object = get_queried_object();
+
+    $args = array(
+        'parent' => $queried_object->term_id,
+        'post_type' => 'product',
+        'product_cat' => $queried_object->slug, 
+        'orderby' => 'pa_featured_product', // Sắp xếp theo giá trị của trường tùy chỉnh
+        'meta_key' => '_product_attributes', // Tên trường tùy chỉnh để xác định sản phẩm nổi bật
+        'order' => 'ASC', // Sắp xếp giảm dần
+    );
+ 
+    $loop = new WP_Query( $args );
+
+    echo "<div id='load-ajax-products' class=''>";  
+
+    if ( $loop->have_posts() ) {
+
+        woocommerce_product_loop_start();
+        while ( $loop->have_posts() ) : $loop->the_post();
+         
+            wc_get_template_part( 'content', 'product' );
+        endwhile;
+        woocommerce_product_loop_end();
+    } 
+    echo "</div>";
+}
+
+add_shortcode('products_of_subcategory', 'woocommerce_product_subcategory');
+
+function woo_breadcrums () {
+    echo '<div class="shop-page-title category-page-title page-title ">';
+    echo '<div class="page-title-inner flex-row  medium-flex-wrap container">';
+    echo '<div class="flex-col flex-grow medium-text-center">';
+    echo '<div class="is-medium">';
+    echo woocommerce_breadcrumb();
+    echo '</div>';
+    echo '<div class="flex-col medium-text-center">';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+}
+add_shortcode('woo_breadcrums', 'woo_breadcrums');
 
 
- add_filter('use_block_editor_for_post', '__return_TRUE');

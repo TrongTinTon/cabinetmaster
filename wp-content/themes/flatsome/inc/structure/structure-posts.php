@@ -26,27 +26,27 @@ function flatsome_blog_article_classes() {
 	if ( ! empty( $classes ) ) echo implode( ' ', $classes );
 }
 
-// // Add Custom Blog Header
-// function flatsome_custom_blog_header() {
-// 	if ( get_theme_mod( 'blog_header' ) && is_home() ) {
-// 		echo '<div class="blog-header-wrapper">' . do_shortcode( get_theme_mod( 'blog_header' ) ) . '</div>';
-// 	}
-// }
-// add_action( 'flatsome_after_header', 'flatsome_custom_blog_header', 10 );
-
-// Add transparent headers
-function flatsome_blog_header_classes( $classes ) {
-	// Add transparent header to product page if set.
-	if ( is_singular( 'post' ) && get_theme_mod( 'blog_single_transparent', 0 ) ) {
-		$classes[] = 'transparent has-transparent nav-dark toggle-nav-dark';
+// Add Custom Blog Header
+function flatsome_custom_blog_header() {
+	if ( get_theme_mod( 'blog_header' ) && is_home() || ( is_archive() || is_search()) && get_post_type() != 'product'|| ( is_single() || is_search()) && get_post_type() != 'product') {
+		echo '<div class="blog-header-wrapper">' . do_shortcode( get_theme_mod( 'blog_header' ) ) . '</div>';
 	}
-	if ( get_theme_mod( 'blog_archive_transparent', 0 ) && is_home() ) {
-		$classes[] = 'transparent has-transparent nav-dark toggle-nav-dark';
-	}
-	return $classes;
 }
+add_action( 'flatsome_after_header', 'flatsome_custom_blog_header', 10 );
 
-add_filter( 'flatsome_header_class', 'flatsome_blog_header_classes', 10 );
+// // Add transparent headers
+// function flatsome_blog_header_classes( $classes ) {
+// 	// Add transparent header to product page if set.
+// 	if ( is_singular( 'post' ) && get_theme_mod( 'blog_single_transparent', 0 ) ) {
+// 		$classes[] = 'transparent has-transparent nav-dark toggle-nav-dark';
+// 	}
+// 	if ( get_theme_mod( 'blog_archive_transparent', 0 ) && is_home() ) {
+// 		$classes[] = 'transparent has-transparent nav-dark toggle-nav-dark';
+// 	}
+// 	return $classes;
+// }
+
+// add_filter( 'flatsome_header_class', 'flatsome_blog_header_classes', 10 );
 
 
 // Add Big blog header
