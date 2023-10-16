@@ -53,11 +53,22 @@ if ( ! empty( $product_tabs ) ) : ?>
 			<div id="sticky-tab-chucnang-container" class="row">
 				<div class="tab-container col small-2 large-2">
 					<div id="sticky-tab-chucnang" class="tab-chucnang" >
-					    <a href="#dac-diem"  id="head-dac-diem"  onclick="clickNavScroll(this, 'head-dac-diem', 'sticky-tab')" class="list-chucnang"><span>ĐẶC ĐIỂM</span></a>
-					    <a href="#thong-so"  id="head-thong-so"  onclick="clickNavScroll(this, 'head-thong-so', 'sticky-tab')" class="list-chucnang"><span>THÔNG SỐ</span></a>
-					    <a href="#hinh-anh"  id="head-hinh-anh"  onclick="clickNavScroll(this, 'head-hinh-anh', 'sticky-tab')" class="list-chucnang"><span>HÌNH ẢNH</span></a>
-					    <!--<a href="#san-pham"  class="list-chucnang">SẢN PHẨM CỦA MÁY</a>-->
-					    <a href="#video-may"id="head-video-may"  onclick="clickNavScroll(this, 'head-video-may', 'sticky-tab')"  class="list-chucnang"><span>VIDEO</span></a>
+					    <a href="#dac-diem"  id="head-dac-diem"  onclick="clickNavScroll(this, 'head-dac-diem', 'sticky-tab')" class="list-chucnang">
+					    	<span>ĐẶC ĐIỂM</span> 
+					    	<i class="fa-regular fa-star-half-stroke"></i>
+					    </a>
+					    <a href="#thong-so"  id="head-thong-so"  onclick="clickNavScroll(this, 'head-thong-so', 'sticky-tab')" class="list-chucnang">
+					    	<span>THÔNG SỐ</span>
+					    	<i class="fa-solid fa-gears"></i>
+					    </a>
+					    <a href="#hinh-anh"  id="head-hinh-anh"  onclick="clickNavScroll(this, 'head-hinh-anh', 'sticky-tab')" class="list-chucnang">
+					    	<span>HÌNH ẢNH</span>
+					    	<i class="fa-regular fa-images"></i>
+					    </a>
+					    <a href="#video-may"id="head-video-may"  onclick="clickNavScroll(this, 'head-video-may', 'sticky-tab')"  class="list-chucnang">
+					    	<span>VIDEO</span>
+					    	<i class="fa-solid fa-video"></i>
+					    </a>
 					</div>
 				</div>
 				<div class="tab-target-container col small-10 large-10">

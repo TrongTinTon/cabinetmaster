@@ -207,6 +207,7 @@ function custom_scroll_product_page() {
                 var stickyTab = document.getElementById("sticky-tab-chucnang-container");
                 if (stickyTab) {
                     const scrollPosition = window.scrollY;
+                    console.log(window.innerWidth)
                     var tabChucnang = document.getElementById('sticky-tab-chucnang')
                     var rect = stickyTab.getBoundingClientRect();
                     var rectItemTab = tabChucnang.getBoundingClientRect();
@@ -217,10 +218,11 @@ function custom_scroll_product_page() {
                     }
 
                     if (headerWrapper.classList.contains('stuck') && tabChucnang) {
-                        tabChucnang.style.top = '120px';
+                        tabChucnang.style.top = '100px';
                     } else if (tabChucnang) {
                         tabChucnang.style.top = '0';
                     }
+
 
                     var tabDescriptions = document.querySelectorAll('#tab-description h3 span');
                     tabDescriptions.forEach(function(span) {
@@ -282,31 +284,100 @@ function turn_rm_toc_collapsable() {
 add_action( 'wp_footer', 'turn_rm_toc_collapsable' );
 add_filter('use_block_editor_for_post', '__return_TRUE');
 
-function tab_catgoreis($categories = array()) {
-    if (empty($categories)) {
-        $queried_object = get_queried_object();
-        $catId = $queried_object->parent > 0 ? $queried_object->parent : $queried_object->term_id;
-        $args = ['parent' => $catId];
-        get_terms( 'product_cat', $args );
-        $categories = get_terms( 'product_cat', $args );
-    }
-    $html = '<div id="category-tab-container">';
-    $html.= '<div class="filter-wrap">';
-    $html.="<h4>Lọc theo:</h4>";
-    $html .= '<div id="category-tabs" class="list-filter">';
+function findRelatedCategories($categories, $term_id) {
+    $relatedCategories = array();
 
-    foreach ( $categories as $category ) {
-        $id = "head-$category->term_id";
-        $term_id = $category->term_id;
-        $parent = $category->parent;
-        $stickyContainer = 'category-tabs';
-        $urlTabIndex = "#$category->id";
-        $active_class = $term_id == $queried_object->term_id ? "active" : "";
-        $html .= "<div id='$id' data-term='$term_id' data-parent='$parent'  onclick='onClickSubCategory(this, `$id`, `$stickyContainer`)' class='subcategory-item $active_class'><span>$category->name</span></div>";
+    // Tìm danh mục có term_id trùng với term_id được cung cấp
+    $targetCategory = null;
+    foreach ($categories as $category) {
+        if ($category->term_id == $term_id) {
+            $targetCategory = $category;
+            break;
+        }
     }
-    $html.="</div>";
-    $html.="</div>";
-    $html .= "</div>";
+
+    if ($targetCategory) {
+        $parent_id = $targetCategory->parent;
+
+        // Tìm danh mục cha
+        $relatedCategories = array_merge($relatedCategories, findParentCategories($categories, $parent_id));
+
+        // Tìm các danh mục cùng cấp
+        $relatedCategories = array_merge($relatedCategories, findSiblingsCategories($categories, $parent_id));
+
+        // Tìm các danh mục con
+        $relatedCategories = array_merge($relatedCategories, findChildCategories($categories, $term_id));
+    }
+
+    return $relatedCategories;
+}
+
+function findSiblingsCategories($categories, $parent_id) {
+    $siblingCategories = array();
+
+    foreach ($categories as $category) {
+        if ($category->parent == $parent_id && $category->term_id != $parent_id && $category->parent > 0) {
+            $siblingCategories[] = $category;
+        }
+    }
+
+    return $siblingCategories;
+}
+
+function findChildCategories($categories, $parent_id) {
+    $childCategories = array();
+
+    foreach ($categories as $category) {
+        if ($category->parent == $parent_id) {
+            $childCategories[] = $category;
+            $childCategories = array_merge($childCategories, findChildCategories($categories, $category->term_id));
+        }
+    }
+
+    return $childCategories;
+}
+
+function findParentCategories($categories, $parent_id) {
+    $parentCategories = array();
+
+    foreach ($categories as $category) {
+        if ($category->term_id == $parent_id) {
+            $parent_id = $category->parent;
+            $parentCategories = findSiblingsCategories($categories, $category->parent);
+        }
+    }
+
+    return $parentCategories;
+}
+
+function tab_catgoreis($categories = array()) {
+    $queried_object = get_queried_object();
+    $categories = get_categories(array(
+        'taxonomy'     => 'product_cat',
+    ));
+   
+    $categories = findRelatedCategories($categories, $queried_object->term_id);
+   
+    if ($categories) {
+        $html = '<div id="category-tab-container">';
+        $html.= '<div class="filter-wrap">';
+        $html.="<h4>Lọc theo:</h4>";
+        $html .= '<div id="category-tabs" class="list-filter">';
+
+        foreach ( $categories as $category ) {
+            $id = "head-$category->term_id";
+            $term_id = $category->term_id;
+            $parent = $category->parent;
+            $stickyContainer = 'category-tabs';
+            $urlTabIndex = "#$category->id";
+            $active_class = $term_id == $queried_object->term_id ? "active" : "";
+            $html .= "<div id='$id' data-term='$term_id' data-parent='$parent'  onclick='onClickSubCategory(this, `$id`, `$stickyContainer`)' class='subcategory-item $active_class'><span>$category->name</span></div>";
+        }
+        $html.="</div>";
+        $html.="</div>";
+        $html .= "</div>";
+    }
+  
     return $html;
 }
 
@@ -333,14 +404,22 @@ function get_product_subcategory($termId) {
 function woocommerce_product_subcategory( $args = array() ) {
     echo tab_catgoreis();
     $queried_object = get_queried_object();
-
+    $nopaging = $queried_object->parent > 0 ? true : false;
+    $pageReqest = get_query_var('paged');
+    $paged =  $pageReqest > 0 ?  $pageReqest : 1;
+    $total = isset( $total ) ? $total : wc_get_loop_prop( 'total_pages' );
+    $products_per_page=wc_get_loop_prop("per_page");
+ 
     $args = array(
         'parent' => $queried_object->term_id,
         'post_type' => 'product',
         'product_cat' => $queried_object->slug, 
-        'orderby' => 'pa_featured_product', // Sắp xếp theo giá trị của trường tùy chỉnh
-        'meta_key' => '_product_attributes', // Tên trường tùy chỉnh để xác định sản phẩm nổi bật
-        'order' => 'ASC', // Sắp xếp giảm dần
+        'nopaging' =>  $nopaging,
+        'paged' => $paged,
+        'posts_per_page' => $products_per_page
+        // 'orderby' => 'pa_featured_product', // Sắp xếp theo giá trị của trường tùy chỉnh
+        // 'meta_key' => '_product_attributes', // Tên trường tùy chỉnh để xác định sản phẩm nổi bật
+        // 'order' => 'ASC', // Sắp xếp giảm dần
     );
  
     $loop = new WP_Query( $args );
@@ -348,10 +427,8 @@ function woocommerce_product_subcategory( $args = array() ) {
     echo "<div id='load-ajax-products' class=''>";  
 
     if ( $loop->have_posts() ) {
-
         woocommerce_product_loop_start();
         while ( $loop->have_posts() ) : $loop->the_post();
-         
             wc_get_template_part( 'content', 'product' );
         endwhile;
         woocommerce_product_loop_end();

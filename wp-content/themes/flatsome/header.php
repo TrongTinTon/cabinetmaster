@@ -5,11 +5,21 @@
     scroll-behavior: smooth;
 "> <!--<![endif]-->
 <head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>" />
-	<link rel="profile" href="http://gmpg.org/xfn/11" />
-	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-	<style>
-        .loading-cat {
+    <meta charset="<?php bloginfo( 'charset' ); ?>" />
+    <link rel="profile" href="http://gmpg.org/xfn/11" />
+    <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+    <style>
+         @media(min-width: 1024px) {
+            .tab-container {
+                max-width: 11em !important;
+                padding: 0!important;
+            }
+            .tab-target-container {
+                padding: 0!important;
+            }
+         }
+         
+          .loading-cat {
             opacity: 0.5;
         }
         #category-tab-container {
@@ -22,6 +32,7 @@
             display: flex;
             align-items: center;
             flex-wrap: wrap;
+            gap: 5px;
         }
         #category-tab-container .filter-wrap h4 {
             width: 8%;
@@ -38,6 +49,7 @@
             column-gap: 10px;
         }
         #category-tab-container .list-filter .subcategory-item {
+        
             box-sizing: border-box;
             background: #363636;
             color: #fff;
@@ -56,7 +68,8 @@
             box-shadow: 2px -1px;
             background-image: linear-gradient(327deg, #ff7700, #fa9419) !important;
         }
-	    .tab-chucnang {
+       
+        .tab-chucnang {
             position: sticky;
             width: 100%;
             justify-content: flex-start;
@@ -68,39 +81,49 @@
             flex-wrap: nowrap;
             padding-top: 5px;
             flex-direction: column;
-            gap: 16px;
+            gap: 10px;
         }
-	   
-	    a.list-chucnang {
+       
+        a.list-chucnang {
             box-sizing: border-box;
-            background: #f4f4f4;
-            color: #334862 !important;
-            width: 7.5em;
-            height: 7.5em;
+            background: #363636;
+            color: #fff;
+            cursor: pointer;
+            user-select: none;
+            padding: 0.5em;
             display: flex;
-            margin-left: 5px;
-            border-radius: 10px;
+            border-radius: 6px;
+            max-width: 8em;
         }
 
         a.list-chucnang span {
             margin: auto;
         }
+        a.list-chucnang i {
+            line-height: normal;
+            margin: auto;
+            display: none;
+        } 
 
         .tab-chucnang .active {
-            background-color: #ff6601 !important;
-            color: #ffffff !important;
+           font-weight: 600;
+            box-shadow: 2px -1px;
+            background-image: linear-gradient(327deg, #ff7700, #fa9419) !important;
         }
-	    
-	    .header-wrapper.stuck {
-	        display: block;
+        
+        .header-wrapper.stuck {
+            display: block;
         }
         .product-small.box {
-            height: 325px;
+            height: 280px;
         }
         
 
         /*tab-let*/
         @media(min-width: 740px) and (max-width: 1023px){
+            #category-tab-container .list-filter{
+                 grid-template-columns: repeat(3,1fr);
+            }
             .sticky-tab-fixed {
                 position: fixed;
             } 
@@ -132,19 +155,38 @@
         /*mobie*/
         @media(max-width: 740px){
             #category-tab-container .list-filter{
-                 grid-template-columns: repeat(2,1fr);
+                grid-template-columns: repeat(2,1fr);
             }
-
-            .tab-panels .tab-container {
+            #category-tab-container .filter-wrap {
+                display: block;
+            }
+            #category-tab-container .list-filter {
                 padding: 0;
             }
             #category-tab-container .filter-wrap h4 {
                 width: auto;
                 text-align: left;
             }
+            a.list-chucnang span {
+               display: none;
+            } 
+            a.list-chucnang i {
+                display: block;
+            }
+            .custom-product-page .product-title-container {
+                max-height: none !important;
+                min-width:  0px !important;
+            }
+            .tab-container {
+                max-width: 5% !important;
+            }
+            .tab-panels .tab-container {
+                padding: 0;
+            }
+
             .tab-chucnang .list-chucnang {
-                height: 45px;
-                width: 60px;
+                height: 30px;
+                width: 30px;
                 display: flex;
             }
             .tab-chucnang .list-chucnang span {
@@ -166,7 +208,7 @@
             }
             
             .product-small.box {
-            height: 215px;
+                height: 215px;
             }
         }
         
@@ -176,9 +218,9 @@
             padding: 0px 0px 20px 0px;
         }
         
-	</style>
-	
-	<?php wp_head(); ?>
+    </style>
+    
+    <?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
@@ -190,14 +232,14 @@
 
 <div id="wrapper">
 
-	<?php do_action( 'flatsome_before_header' ); ?>
+    <?php do_action( 'flatsome_before_header' ); ?>
 
-	<header id="header" class="header <?php flatsome_header_classes(); ?>">
-		<div class="header-wrapper">
-			<?php get_template_part( 'template-parts/header/header', 'wrapper' ); ?>
-		</div>
-	</header>
+    <header id="header" class="header <?php flatsome_header_classes(); ?>">
+        <div class="header-wrapper">
+            <?php get_template_part( 'template-parts/header/header', 'wrapper' ); ?>
+        </div>
+    </header>
 
-	<?php do_action( 'flatsome_after_header' ); ?>
-    
-	<main id="main" class="<?php flatsome_main_classes(); ?>">
+    <?php do_action( 'flatsome_after_header' ); ?>
+
+    <main id="main" class="<?php flatsome_main_classes(); ?>">

@@ -1,0 +1,153 @@
+2023-10-13T03:03:18+00:00 CRITICAL Uncaught Error: Cannot use object of type WP_Term as array in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php:288
+Stack trace:
+#0 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php(303): getCategoriesByTermAndParent(Array, NULL, NULL)
+#1 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php(356): tab_catgoreis()
+#2 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\shortcodes.php(395): woocommerce_product_subcategory('', '', 'products_of_sub...')
+#3 [internal function]: do_shortcode_tag(Array)
+#4 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\shortcodes.php(235): preg_replace_callback('/\\[(\\[?)(produc...', 'do_shortcode_ta...', '[products_of_su...')
+#5 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\woocommerce\layouts\category-none.php(44): do_shortcode('[products_of_su...')
+#6 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\template.php(787): require('C:\\xampp\\htdocs...')
+#7 C:\xampp\htdocs\cabinetmaster.co in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php on line 288
+
+2023-10-13T03:03:35+00:00 CRITICAL Uncaught Error: Using $this when not in object context in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php:303
+Stack trace:
+#0 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php(356): tab_catgoreis()
+#1 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\shortcodes.php(395): woocommerce_product_subcategory('', '', 'products_of_sub...')
+#2 [internal function]: do_shortcode_tag(Array)
+#3 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\shortcodes.php(235): preg_replace_callback('/\\[(\\[?)(produc...', 'do_shortcode_ta...', '[products_of_su...')
+#4 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\woocommerce\layouts\category-none.php(44): do_shortcode('[products_of_su...')
+#5 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\template.php(787): require('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\plugins\woocommerce\includes\wc-core-functions.php(284): load_template('C:\\xampp\\htdocs...', false)
+#7 C:\xampp\htdocs\ca in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php on line 303
+
+2023-10-13T03:04:11+00:00 CRITICAL Uncaught Error: Using $this when not in object context in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php:303
+Stack trace:
+#0 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php(356): tab_catgoreis()
+#1 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\shortcodes.php(395): woocommerce_product_subcategory('', '', 'products_of_sub...')
+#2 [internal function]: do_shortcode_tag(Array)
+#3 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\shortcodes.php(235): preg_replace_callback('/\\[(\\[?)(produc...', 'do_shortcode_ta...', '[products_of_su...')
+#4 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\woocommerce\layouts\category-none.php(44): do_shortcode('[products_of_su...')
+#5 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\template.php(787): require('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\plugins\woocommerce\includes\wc-core-functions.php(284): load_template('C:\\xampp\\htdocs...', false)
+#7 C:\xampp\htdocs\ca in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php on line 303
+
+2023-10-13T03:06:05+00:00 CRITICAL Uncaught Error: Using $this when not in object context in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php:304
+Stack trace:
+#0 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php(357): tab_catgoreis()
+#1 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\shortcodes.php(395): woocommerce_product_subcategory('', '', 'products_of_sub...')
+#2 [internal function]: do_shortcode_tag(Array)
+#3 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\shortcodes.php(235): preg_replace_callback('/\\[(\\[?)(produc...', 'do_shortcode_ta...', '[products_of_su...')
+#4 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\woocommerce\layouts\category-none.php(44): do_shortcode('[products_of_su...')
+#5 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\template.php(787): require('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\plugins\woocommerce\includes\wc-core-functions.php(284): load_template('C:\\xampp\\htdocs...', false)
+#7 C:\xampp\htdocs\ca in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php on line 304
+
+2023-10-13T03:06:11+00:00 CRITICAL Uncaught Error: Function name must be a string in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php:304
+Stack trace:
+#0 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php(357): tab_catgoreis()
+#1 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\shortcodes.php(395): woocommerce_product_subcategory('', '', 'products_of_sub...')
+#2 [internal function]: do_shortcode_tag(Array)
+#3 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\shortcodes.php(235): preg_replace_callback('/\\[(\\[?)(produc...', 'do_shortcode_ta...', '[products_of_su...')
+#4 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\woocommerce\layouts\category-none.php(44): do_shortcode('[products_of_su...')
+#5 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\template.php(787): require('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\plugins\woocommerce\includes\wc-core-functions.php(284): load_template('C:\\xampp\\htdocs...', false)
+#7 C:\xampp\htdocs\cabinetmas in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php on line 304
+
+2023-10-13T03:51:51+00:00 CRITICAL Uncaught Error: Cannot use object of type WP_Term as array in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php:289
+Stack trace:
+#0 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php(317): getRelatedCategories(Array, 20)
+#1 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php(364): tab_catgoreis()
+#2 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\shortcodes.php(395): woocommerce_product_subcategory('', '', 'products_of_sub...')
+#3 [internal function]: do_shortcode_tag(Array)
+#4 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\shortcodes.php(235): preg_replace_callback('/\\[(\\[?)(produc...', 'do_shortcode_ta...', '[products_of_su...')
+#5 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\woocommerce\layouts\category-none.php(44): do_shortcode('[products_of_su...')
+#6 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\template.php(787): require('C:\\xampp\\htdocs...')
+#7 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\ in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php on line 289
+
+2023-10-13T03:56:40+00:00 CRITICAL Uncaught Error: Cannot use object of type WP_Term as array in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php:292
+Stack trace:
+#0 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php(313): getRelatedCategories(Array, 30)
+#1 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php(360): tab_catgoreis()
+#2 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\shortcodes.php(395): woocommerce_product_subcategory('', '', 'products_of_sub...')
+#3 [internal function]: do_shortcode_tag(Array)
+#4 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\shortcodes.php(235): preg_replace_callback('/\\[(\\[?)(produc...', 'do_shortcode_ta...', '[products_of_su...')
+#5 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\woocommerce\layouts\category-none.php(44): do_shortcode('[products_of_su...')
+#6 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\template.php(787): require('C:\\xampp\\htdocs...')
+#7 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\ in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php on line 292
+
+2023-10-13T04:05:59+00:00 CRITICAL Uncaught Error: Cannot use object of type WP_Term as array in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php:293
+Stack trace:
+#0 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php(302): findRelated(Array, 30, Array, Array)
+#1 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php(313): getRelatedCategories(Array, 30)
+#2 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php(360): tab_catgoreis()
+#3 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\shortcodes.php(395): woocommerce_product_subcategory('', '', 'products_of_sub...')
+#4 [internal function]: do_shortcode_tag(Array)
+#5 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\shortcodes.php(235): preg_replace_callback('/\\[(\\[?)(produc...', 'do_shortcode_ta...', '[products_of_su...')
+#6 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\woocommerce\layouts\category-none.php(44): do_shortcode('[products_of_su...')
+#7 C:\xampp\htdocs\cabinetmast in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php on line 293
+
+2023-10-13T04:41:14+00:00 CRITICAL Cannot redeclare findRelatedCategories() (previously declared in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php:285) in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php on line 305
+
+2023-10-13T04:41:15+00:00 CRITICAL Cannot redeclare findRelatedCategories() (previously declared in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php:285) in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php on line 305
+
+2023-10-13T04:41:31+00:00 CRITICAL Uncaught Error: Call to undefined function findChildCategories() in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php:298
+Stack trace:
+#0 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php(326): findRelatedCategories(Array, 20)
+#1 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php(372): tab_catgoreis()
+#2 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\shortcodes.php(395): woocommerce_product_subcategory('', '', 'products_of_sub...')
+#3 [internal function]: do_shortcode_tag(Array)
+#4 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\shortcodes.php(235): preg_replace_callback('/\\[(\\[?)(produc...', 'do_shortcode_ta...', '[products_of_su...')
+#5 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\woocommerce\layouts\category-none.php(44): do_shortcode('[products_of_su...')
+#6 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\template.php(787): require('C:\\xampp\\htdocs...')
+#7 C:\xampp\htdocs\cabinetmaster.com.vn\wp-c in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php on line 298
+
+2023-10-13T07:21:48+00:00 CRITICAL syntax error, unexpected ')' in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php on line 422
+
+2023-10-13T07:38:56+00:00 CRITICAL Uncaught ArgumentCountError: Too few arguments to function remove_filter(), 1 passed in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php on line 401 and at least 2 expected in C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\plugin.php:313
+Stack trace:
+#0 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php(401): remove_filter('loop_shop_per_p...')
+#1 C:\xampp\htdocs\cabinetmaster.com.vn\wp-settings.php(603): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\cabinetmaster.com.vn\wp-config.php(100): require_once('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\cabinetmaster.com.vn\wp-load.php(50): require_once('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\cabinetmaster.com.vn\wp-blog-header.php(12): require_once('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\cabinetmaster.com.vn\index.php(17): require('C:\\xampp\\htdocs...')
+#6 {main}
+  thrown in C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\plugin.php on line 313
+
+2023-10-13T07:39:28+00:00 CRITICAL Uncaught ArgumentCountError: Too few arguments to function remove_filter(), 1 passed in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php on line 401 and at least 2 expected in C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\plugin.php:313
+Stack trace:
+#0 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php(401): remove_filter('loop_shop_per_p...')
+#1 C:\xampp\htdocs\cabinetmaster.com.vn\wp-settings.php(603): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\cabinetmaster.com.vn\wp-config.php(100): require_once('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\cabinetmaster.com.vn\wp-load.php(50): require_once('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\cabinetmaster.com.vn\wp-blog-header.php(12): require_once('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\cabinetmaster.com.vn\index.php(17): require('C:\\xampp\\htdocs...')
+#6 {main}
+  thrown in C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\plugin.php on line 313
+
+2023-10-13T07:39:29+00:00 CRITICAL Uncaught ArgumentCountError: Too few arguments to function remove_filter(), 1 passed in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php on line 401 and at least 2 expected in C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\plugin.php:313
+Stack trace:
+#0 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php(401): remove_filter('loop_shop_per_p...')
+#1 C:\xampp\htdocs\cabinetmaster.com.vn\wp-settings.php(603): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\cabinetmaster.com.vn\wp-config.php(100): require_once('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\cabinetmaster.com.vn\wp-load.php(50): require_once('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\cabinetmaster.com.vn\wp-blog-header.php(12): require_once('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\cabinetmaster.com.vn\index.php(17): require('C:\\xampp\\htdocs...')
+#6 {main}
+  thrown in C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\plugin.php on line 313
+
+2023-10-13T07:43:44+00:00 CRITICAL syntax error, unexpected '3' (T_LNUMBER), expecting variable (T_VARIABLE) in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php(402) : runtime-created function on line 1
+
+2023-10-13T07:43:44+00:00 CRITICAL syntax error, unexpected '3' (T_LNUMBER), expecting variable (T_VARIABLE) in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php(402) : runtime-created function on line 1
+
+2023-10-13T07:45:23+00:00 CRITICAL syntax error, unexpected '}' in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php(413) : runtime-created function on line 1
+
+2023-10-13T08:06:13+00:00 CRITICAL Uncaught ArgumentCountError: Too few arguments to function wc_get_loop_prop(), 0 passed in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php on line 411 and at least 1 expected in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\plugins\woocommerce\includes\wc-template-functions.php:219
+Stack trace:
+#0 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\functions.php(411): wc_get_loop_prop()
+#1 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\shortcodes.php(395): woocommerce_product_subcategory('', '', 'products_of_sub...')
+#2 [internal function]: do_shortcode_tag(Array)
+#3 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\shortcodes.php(235): preg_replace_callback('/\\[(\\[?)(produc...', 'do_shortcode_ta...', '[products_of_su...')
+#4 C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\themes\flatsome\woocommerce\layouts\category-none.php(44): do_shortcode('[products_of_su...')
+#5 C:\xampp\htdocs\cabinetmaster.com.vn\wp-includes\template.php(787): require('C:\\xampp\\htdocs.. in C:\xampp\htdocs\cabinetmaster.com.vn\wp-content\plugins\woocommerce\includes\wc-template-functions.php on line 219
+

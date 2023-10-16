@@ -28,7 +28,7 @@ function flatsome_blog_article_classes() {
 
 // Add Custom Blog Header
 function flatsome_custom_blog_header() {
-	if ( get_theme_mod( 'blog_header' ) && is_home() || ( is_archive() || is_search()) && get_post_type() != 'product'|| ( is_single() || is_search()) && get_post_type() != 'product') {
+	if ( get_theme_mod( 'blog_header' ) && is_home() && is_search() || is_archive()  && get_post_type() != 'product' || is_single()  && get_post_type() != 'product' && !is_search())  {
 		echo '<div class="blog-header-wrapper">' . do_shortcode( get_theme_mod( 'blog_header' ) ) . '</div>';
 	}
 }
