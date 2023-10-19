@@ -28,7 +28,7 @@ $review_ratings_enabled = wc_review_ratings_enabled();
 ?>
 <div id="reviews" class="woocommerce-Reviews row">
 	<div id="comments" class="col large-<?php if ( get_comment_pages_count() == 0 || $tab_style == 'sections' || $tab_style == 'tabs_vertical' ) { echo '12'; } else { echo '7'; } ?>">
-		<h3 class="woocommerce-Reviews-title normal">
+		<p class="woocommerce-Reviews-title normal">
 			<?php
 			$count = $product->get_review_count();
 			if ( $count && $review_ratings_enabled ) {
@@ -39,7 +39,7 @@ $review_ratings_enabled = wc_review_ratings_enabled();
 				esc_html_e( 'Reviews', 'woocommerce' );
 			}
 			?>
-		</h3>
+		</p>
 
 		<?php if ( have_comments() ) : ?>
 			<ol class="commentlist">

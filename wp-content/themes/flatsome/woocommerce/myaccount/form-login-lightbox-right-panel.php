@@ -59,7 +59,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 
 			<div class="account-login-inner inner-padding">
 
-				<h3 class="uppercase"><?php esc_html_e( 'Login', 'woocommerce' ); ?></h3>
+				<p class="uppercase"><?php esc_html_e( 'Login', 'woocommerce' ); ?></p>
 
 				<form class="woocommerce-form woocommerce-form-login login" method="post">
 
