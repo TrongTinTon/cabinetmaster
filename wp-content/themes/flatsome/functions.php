@@ -409,7 +409,6 @@ function woocommerce_product_subcategory( $args = array() ) {
     $paged =  $pageReqest > 0 ?  $pageReqest : 1;
     $total = isset( $total ) ? $total : wc_get_loop_prop( 'total_pages' );
     $products_per_page=wc_get_loop_prop("per_page");
- 
     $args = array(
         'parent' => $queried_object->term_id,
         'post_type' => 'product',
@@ -425,7 +424,6 @@ function woocommerce_product_subcategory( $args = array() ) {
     $loop = new WP_Query( $args );
 
     echo "<div id='load-ajax-products' class=''>";  
-
     if ( $loop->have_posts() ) {
         woocommerce_product_loop_start();
         while ( $loop->have_posts() ) : $loop->the_post();
@@ -443,7 +441,7 @@ function woo_breadcrums () {
     echo '<div class="page-title-inner flex-row  medium-flex-wrap container">';
     echo '<div class="flex-col flex-grow medium-text-center">';
     echo '<div class="is-medium">';
-    echo woocommerce_breadcrumb();
+    echo woocommerce_breadcrumb(); 
     echo '</div>';
     echo '<div class="flex-col medium-text-center">';
     echo '</div>';
@@ -453,3 +451,82 @@ function woo_breadcrums () {
 add_shortcode('woo_breadcrums', 'woo_breadcrums');
 
 
+function custom_left_menu_blog_category() {
+    echo '<span class="widget-title "><span>Chuyên mục</span></span>';
+    echo '<div class="is-divider small"></div>';
+    echo "<ul id='menu-danh-muc' class='menu active'>";
+    $categories = get_categories(array(
+       'taxonomy'  => 'category',
+       'parent' => 0
+    ));
+
+    foreach ($categories as $category) {
+        $category_link = get_category_link($category->term_id);
+        echo "<li class='menu-item active'>";
+        echo    "<a rel='nofollow' href='$category_link'>$category->name</a>";
+            $child_categories = get_terms(array(
+                'taxonomy' => 'category',
+                'parent' => $category->term_id, // Lấy các danh mục con của danh mục cha hiện tại.
+                'hide_empty' => false,
+            ));
+            if (!empty($child_categories)) {    
+                echo    "<ul class='sub-menu'>";            
+                    foreach ($child_categories as $child_category) {
+                        echo '<li slug="$child_category->slug" class="menu-item" ><a rel="nofollow" href="' . get_term_link($child_category) . '">' . $child_category->name . '</a></li>';
+                    }
+                echo "</ul>";
+            }
+        echo "</li>";
+    }
+    echo "</ul>";
+}
+
+add_shortcode('left_menu_blog_category', 'custom_left_menu_blog_category');
+
+
+function custom_left_menu_product_category($atts = array()) {
+    $args = shortcode_atts(array(
+        'list' => '',
+    ), $atts);
+
+    // Kiểm tra xem 'list' có được truyền vào không
+    if (empty($args['list'])) {
+        return 'Danh sách trống.';
+    }
+      // Chuyển đổi chuỗi danh sách thành mảng
+    $list_array = explode(',', $args['list']);
+
+    echo '<span class="widget-title "><span>Danh mục sản phẩm</span></span>';
+    echo '<div class="is-divider small"></div>';
+    echo "<ul id='menu-danh-muc' class='menu'>";
+    // Danh sách các danh mục cha bạn muốn lấy
+
+    $selected_parent_categories =  $list_array;
+
+    foreach ($selected_parent_categories as $slug) {
+        $category = get_term_by( 'slug', $slug, 'product_cat' );
+        if ($category) {
+            $category_link = get_category_link($category->term_id);
+            echo "<li slug='$category->slug' class='menu-item'>";
+            echo    "<a rel='nofollow' href='$category_link'>$category->name</a>";
+          
+                        $child_categories = get_terms(array(
+                            'taxonomy' => 'product_cat',
+                            'parent' => $category->term_id, // Lấy các danh mục con của danh mục cha hiện tại.
+                            'hide_empty' => false,
+                        ));
+                        if (!empty($child_categories)) {    
+                            echo    "<ul class='sub-menu'>";            
+                                foreach ($child_categories as $child_category) {
+                                    echo '<li slug="$child_category->slug" class="menu-item" ><a rel="nofollow" href="' . get_term_link($child_category) . '">' . $child_category->name . '</a></li>';
+                                }
+                            echo "</ul>";
+                        }
+                 
+            echo "</li>";
+        }
+    }
+    echo "</ul>";
+}
+
+add_shortcode('left_menu_product_category', 'custom_left_menu_product_category');

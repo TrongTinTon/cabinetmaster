@@ -9,7 +9,15 @@
     <link rel="profile" href="http://gmpg.org/xfn/11" />
     <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
     <style>
-         @media(min-width: 1024px) {
+      
+        .title-wrapper {
+            height: 47px;
+
+        }
+        .price-wrapper {
+            padding-top: 5px;
+        }
+        @media(min-width: 1024px) {
             .tab-container {
                 max-width: 11em !important;
                 padding: 0!important;
@@ -114,9 +122,7 @@
         .header-wrapper.stuck {
             display: block;
         }
-        .product-small.box {
-            height: 280px;
-        }
+
         
 
         /*tab-let*/
