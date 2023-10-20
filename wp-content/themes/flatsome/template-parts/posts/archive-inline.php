@@ -8,15 +8,8 @@ while ( have_posts() ) : the_post(); ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<div class="article-inner <?php flatsome_blog_article_classes(); ?>">
-
-		<?php if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it. ?>
-		<div class="entry-image-float">
-	 		<?php get_template_part( 'template-parts/posts/partials/entry-image', 'default'); ?>
-			<?php if ( get_theme_mod( 'blog_badge', 1 ) ) get_template_part( 'template-parts/posts/partials/entry', 'post-date' ); ?>
-	 	</div>
- 		<?php } ?>
+		<?php get_template_part('template-parts/posts/partials/entry-header', flatsome_option('blog_posts_header_style') ); ?>
 		<?php get_template_part('template-parts/posts/content', 'default' ); ?>
-		<div class="clearfix"></div>
 		<?php get_template_part('template-parts/posts/partials/entry-footer', 'default' ); ?>
 	</div>
 </article>

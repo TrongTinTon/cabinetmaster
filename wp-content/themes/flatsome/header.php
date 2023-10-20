@@ -9,7 +9,21 @@
     <link rel="profile" href="http://gmpg.org/xfn/11" />
     <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
     <style>
-      
+        #post-left-list .entry-image-float  {
+          height: 50px !important;
+          width: 80px !important;
+          margin-right: 10px !important;
+        }
+        #post-left-list .entry-content {
+            padding: 0 !important;
+        }
+        #post-left-list .entry-title {
+          font-size: 14px !important;
+          margin: 0;
+        }
+        #post-left-lis .entry-header-text {
+         padding: 0 !important;
+        }
         .title-wrapper {
             height: 47px;
 

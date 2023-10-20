@@ -472,7 +472,12 @@ function custom_left_menu_blog_category() {
             if (!empty($child_categories)) {    
                 echo    "<ul class='sub-menu'>";            
                     foreach ($child_categories as $child_category) {
-                        echo '<li slug="$child_category->slug" class="menu-item" ><a rel="nofollow" href="' . get_term_link($child_category) . '">' . $child_category->name . '</a></li>';
+                        if ($child_category->slug =='tin-tuc-chuyen-nghanh') {
+                            $nofollow = 'dofollow';
+                        } else {
+                            $nofollw = 'nofollow';
+                        }
+                        echo '<li class="menu-item" ><a rel="'.$nofollow.'" href="' . get_term_link($child_category) . '">' . $child_category->name . '</a></li>';
                     }
                 echo "</ul>";
             }
@@ -530,3 +535,60 @@ function custom_left_menu_product_category($atts = array()) {
 }
 
 add_shortcode('left_menu_product_category', 'custom_left_menu_product_category');
+
+
+function cta_button () {
+   echo '<div class="zalo-chat-widget" data-oaid="2153511105125714794" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="" data-height="" data-right="10"></div>';
+}
+add_action('wp_footer', 'cta_button' );
+
+function enqueue_custom_scripts() {
+    wp_enqueue_script('custom-script', get_template_directory_uri() . '/assets/js/zalo_chat_widget.js');
+}
+
+add_action('wp_enqueue_scripts', 'enqueue_custom_scripts');
+
+
+function custom_left_menu_archive_list( $args = array() ) {
+    $args = array(
+        'post_type' => 'post',
+        'posts_per_page' => 3
+    );
+ 
+    $loop = new WP_Query( $args );
+    if ( $loop->have_posts() ) {
+        echo '<div id="post-left-list">';
+        echo '<h1 class="blog-header-wrapper"><span>' . get_theme_mod( 'blog_header' ) . '</span></h1>';
+         while ( $loop->have_posts() ) : $loop->the_post(); ?>
+
+        <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+            <div class="article-inner <?php flatsome_blog_article_classes(); ?>">
+
+                <?php if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it. ?>
+                <div class="entry-image-float">
+                    <?php get_template_part( 'template-parts/posts/partials/entry-image', 'default'); ?>
+                </div>
+                <?php } ?>
+                <div class="entry-content">
+                
+                    <div class="entry-summary">
+                        <header class="entry-header">
+                            <div class="entry-header-text text-<?php echo get_theme_mod( 'blog_posts_title_align', 'center' );?>">
+                                 <?php echo '<h2 class="entry-title"><a href="' . get_the_permalink() . '" rel="nofollowo" class="plain">' . get_the_title() . '</a></h2>';?>
+                            </div>
+
+                        </header>
+                    </div>
+                </div>
+    
+            </div>
+        </article>
+
+        <?php endwhile; 
+        echo '</div>';
+    } 
+}
+
+add_shortcode('left_menu_archive_list', 'custom_left_menu_archive_list');
+
+
